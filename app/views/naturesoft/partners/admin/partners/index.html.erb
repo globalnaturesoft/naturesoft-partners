@@ -1,0 +1,115 @@
+<p id="notice"><%= notice %></p>
+
+<% title "Partners" %>
+
+<div class="text-right">
+    <%= link_to ("#{t(:new_partner)}" + '<i class="icon-plus22 position-right"></i>').html_safe, naturesoft_partners.new_admin_partner_path, class: 'btn btn-primary' %>
+</div>
+<br />
+
+<form class="listing-form">
+    
+    <div class="panel panel-flat">
+        <div class="panel-body filter-box">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><%= t(:sort_by) %></label>
+                        <%= select_tag(:sort_by, options_for_select(Naturesoft::Partners::Partner.sort_by, :selected => params[:sort_by]), class: "select2") %>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><%= t(:sort_order) %></label>
+                        <%= select_tag(:sort_orders, options_for_select(Naturesoft::Partners::Partner.sort_orders, :selected => params[:sort_orders]), class: "select2") %>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group has-feedback">
+                        <label><%= t(:search) %></label>
+                        <input type="text" name="key" class="form-control" placeholder="Enter search..." value="<%= params[:key] %>">
+                        <div class="form-control-feedback">
+                            <i class="icon-search4 text-size-base"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Basic datatable -->
+    <div class="panel panel-flat">        
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="bg-teal-800">
+                        <th><%= t(:logo) %></th>
+                        <th><%= t(:name) %></th>
+                        <th><%= t(:description) %></th>
+                        <th><%= t(:website) %></th>
+                        <th><%= t(:creator)%></th>
+                        <th><%= t(:created_at) %></th>
+                        <th><%= t(:actions) %></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @partners.each do |partner| %>
+                        <tr>
+                            <td>
+                              <% if partner.logo.system.present? %>
+                                <%= link_to image_tag(partner.logo.system, size: "70x70", class: "img-rounded img-preview"), "" %>
+                              <% else %>
+                                <%= link_to image_tag("/backend/assets/images/placeholder.jpg", size: "70x70", class: "img-rounded img-preview"), "" %>
+                              <% end %>
+                            </td>
+                            <td>
+                                <%= partner.name %>
+                            </td>
+                            <td>
+                                <%= partner.description %>
+                            </td>
+                            <td>
+                                <%= partner.website %>
+                            </td>
+                            <td>
+                                <div class="media-left align_center">
+                                    <img src="" class="img-circle" alt="">
+                                    <br />Creator
+                                </div>
+                            </td>
+                            <td><%= partner.created_at.strftime("%d/%m/%Y") %></td>
+                            <td class="text-center">
+                                <ul class="icons-list">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="icon-menu9"></i>
+                                        </a>
+                
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li>
+                                                <%= link_to '<i class="icon-pencil7"></i>'.html_safe + t(:edit), naturesoft_partners.edit_admin_partner_path(partner) %>
+                                            </li>
+                                            <li>
+                                                <%= link_to '<i class="icon-bin"></i>'.html_safe + t(:delete), naturesoft_partners.admin_partner_path(partner), method: :delete, data: { confirm: 'Are you sure?' } , class: "backend_delete_item" %>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                      </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="dataTables_wrapper no-footer">
+            <div class="datatable-footer showed">
+                <div class="dataTables_info" ><%= page_entries_info @partners %></div>
+                <div class="dataTables_paginate paging_simple_numbers">
+                    <%= will_paginate @partners, previous_label: '←', next_label: '→', renderer: BootstrapPagination::Rails %>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <!-- /basic datatable -->
+</form>
