@@ -49,7 +49,8 @@
                         <th><%= t(:website) %></th>
                         <th><%= t(:creator)%></th>
                         <th><%= t(:created_at) %></th>
-                        <th><%= t(:actions) %></th>
+                        <th><%= t(:status) %></th>
+                        <th class="text-right"><%= t(:actions) %></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,25 +79,30 @@
                                 </div>
                             </td>
                             <td><%= partner.created_at.strftime("%d/%m/%Y") %></td>
-                            <td class="text-center">
-                                <ul class="icons-list">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon-menu9"></i>
-                                        </a>
-                
-                                        <ul class="dropdown-menu dropdown-menu-right">
+                            <td><%= display_status(partner.status) %></td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <%= link_to '<i class="icon-pencil"></i>'.html_safe, naturesoft_partners.edit_admin_partner_path(partner), class: "btn bg-teal-400 btn-icon" %>
+                                    <button type="button" class="btn bg-teal-400 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <% if partner.status == 'inactive' %>
                                             <li>
-                                                <%= link_to '<i class="icon-pencil7"></i>'.html_safe + t(:edit), naturesoft_partners.edit_admin_partner_path(partner) %>
+                                                <%= link_to "<i class=\"icon-unlocked2\"></i> Enable".html_safe, naturesoft_partners.enable_admin_partners_path(partner), method: :put %>
                                             </li>
+                                        <% end %>
+                                        <% if partner.status == 'active' %>
                                             <li>
-                                                <%= link_to '<i class="icon-bin"></i>'.html_safe + t(:delete), naturesoft_partners.admin_partner_path(partner), method: :delete, data: { confirm: 'Are you sure?' } , class: "backend_delete_item" %>
+                                                <%= link_to "<i class=\"icon-lock2\"></i> Disable".html_safe, naturesoft_partners.disable_admin_partners_path(partner), method: :put %>
                                             </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                        <% end %>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <%= link_to '<i class="glyphicon glyphicon-trash"></i>'.html_safe + t(:delete), naturesoft_partners.admin_partner_path(partner), method: :delete, data: { confirm: 'Are you sure?' } , class: "backend_delete_item" %>
+                                        </li>
+                                    </ul>
+                                </div>
                             </td>
-                      </tr>
+                        </tr>
                     <% end %>
                 </tbody>
             </table>

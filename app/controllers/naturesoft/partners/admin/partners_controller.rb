@@ -2,7 +2,7 @@ module Naturesoft
   module Partners
     module Admin
       class PartnersController < Naturesoft::Admin::AdminController
-        before_action :set_partner, only: [:show, :edit, :update, :destroy]
+        before_action :set_partner, only: [:show, :edit, :update, :destroy, :enable, :disable]
         before_action :default_breadcrumb
         
         # add top breadcrumb
@@ -58,6 +58,18 @@ module Naturesoft
         def destroy
           @partner.destroy
           redirect_to admin_partners_path, notice: 'Partner was successfully destroyed.'
+        end
+        
+        # ENABLE /partners/stutus
+        def enable
+          @partner.enable
+          render text: "Status was sucessfully enabled"
+        end
+        
+        # DISABLE /partners/stutus
+        def disable
+          @partner.disable
+          render text: "Status was sucessfully disabled"
         end
     
         private

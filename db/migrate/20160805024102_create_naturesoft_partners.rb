@@ -8,6 +8,7 @@ class CreateNaturesoftPartners < ActiveRecord::Migration[5.0]
       t.integer :height
       t.integer :width
       t.string :scale_type
+      t.string :status, :default => "active"
       t.references :user, references: :naturesoft_users, index: true
 
       t.timestamps

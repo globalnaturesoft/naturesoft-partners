@@ -46,5 +46,14 @@ module Naturesoft::Partners
       
       return records
     end
+    
+    # enable/disable status
+    def enable
+			update_columns(status: "active")
+		end
+    
+    def disable
+			update_columns(status: "inactive")
+		end
   end
 end
