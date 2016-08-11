@@ -51,26 +51,17 @@ module Naturesoft
       
       # For backend list
 			version :system do
-				process :resize_to_fit => [60, 60]
+				process :resize_to_fill => [80, 80]
 			end
-      
-      # Thumb size from slideshow
-      version :thumb do
-				process :partner_resize
-			end 
 			
-			# Thumb size from slideshow
-			def partner_resize
-				if model.present? 
-					if model.scale_type == "fill"
-						resize_to_fill(model.width, model.height)
-					elsif model.scale_type == "fit"
-						resize_to_fit(model.width, model.height)
+			# Thumbnails sizes
+			Naturesoft::Option.options("partners")["partners"]["thumbnails"].each do |row|
+				version :"#{row[0]}" do
+					if row[1]["scale"] == "fill"
+						process :resize_to_fill => [row[1]["width"].to_i, row[1]["height"].to_i]
 					else
-						resize_to_fill(400, 300)
+						process :resize_to_fit => [row[1]["width"].to_i, row[1]["height"].to_i]
 					end
-				else
-					resize_to_fill(400, 300)
 				end
 			end
     end

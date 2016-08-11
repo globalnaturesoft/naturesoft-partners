@@ -57,11 +57,7 @@
                     <% @partners.each do |partner| %>
                         <tr>
                             <td>
-                              <% if partner.logo.system.present? %>
-                                <%= link_to image_tag(partner.logo.system, size: "70x70", class: "img-rounded img-preview"), "" %>
-                              <% else %>
-                                <%= link_to image_tag("/backend/assets/images/placeholder.jpg", size: "70x70", class: "img-rounded img-preview"), "" %>
-                              <% end %>
+                                <%= link_to image_tag(image_src(partner.logo.system), size: "70x70", class: "img-rounded img-preview"), image_src(partner.logo.big.to_s) %>
                             </td>
                             <td>
                                 <%= partner.name %>
