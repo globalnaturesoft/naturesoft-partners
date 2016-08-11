@@ -12,7 +12,7 @@ module Naturesoft
     
         # GET /partners
         def index
-          @partners = Partner.search(params).paginate(:page => params[:page], :per_page => 10)
+          @partners = Partner.search(params).paginate(:page => params[:page], :per_page => Naturesoft::Option.get("partners", "items_per_page"))
         end
     
         # GET /partners/1

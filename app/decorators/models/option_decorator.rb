@@ -17,7 +17,6 @@ Naturesoft::Option.class_eval do
         "height" => "80",
         "scale" => "fill"
       }
-    }
+    },
   }
-
 end
