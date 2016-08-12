@@ -3,35 +3,22 @@
 <div class="panel panel-flat">
   <div class="panel-body">
     <%= form_for([naturesoft, :admin, Naturesoft::Option.new], html: {}) do |f| %>
-      <h4 class="text-semibold">Thumbnail</h4>
+      <div class="row">
+        <div class="col-md-3"><h4 class="text-semibold">Thumbnail <span class="text-muted small">Code</span></div>
+        <div class="col-md-2"><br>Width</div>
+        <div class="col-md-2"><br>Height</div>
+        <div class="col-md-3"><br>Scale</div>
+        <div class="col-md-2"></div>
+      </div>
       
-      <% ["big","medium","small"].each do |s| %>
-          <h5><%= s.capitalize %> size <span class="text-muted small">width x height + scale</span></h5>
-          <div class="row">
-            <div class="col-sm-3 col-md-3">
-              <div class="form-group">
-                <div class="">
-                  <%= text_field_tag "options[partners][thumbnails]["+s+"][width]", @options["partners"]["thumbnails"][s]["width"], class: "form-control number_input" %>
-                </div>
-              </div>          
-            </div>
-            <div class="col-sm-3 col-md-3">
-              <div class="form-group">
-                <div class="">
-                  <%= text_field_tag "options[partners][thumbnails]["+s+"][height]", @options["partners"]["thumbnails"][s]["height"], class: "form-control number_input" %>
-                </div>
-              </div>          
-            </div>
-            <div class="col-sm-3 col-md-3">
-              <div class="form-group">
-                <select class="select2" name="options[partners][thumbnails][<%= s %>][scale]">
-                  <option <%= "selected" if @options["partners"]["thumbnails"][s]["scale"] == "fill" %> value="fill"><%= t(:fill) %></option>
-                  <option <%= "selected" if @options["partners"]["thumbnails"][s]["scale"] == "fit" %> value="fit"><%= t(:fit) %></option>
-                </select>
-              </div>
-            </div>
-          </div>
-      <% end %>
+      <div class="addable-form" data-sample="thumbnail-size-form">
+        <div class="addable-container">
+          <% @options["partners"]["thumbnails"].each_with_index do |size, index| %>
+            <%= render 'thumbnail_size', size: size[1], index: index %>
+          <% end %>
+        </div>
+        <a href="#add" class="btn btn-info addable-add">Add new size</a>
+      </div>
       
       <hr>
       <h4 class="text-semibold">Listing</h4>
@@ -74,3 +61,9 @@
     <% end %>
   </div>
 </div>
+  
+<!-- thumbnail size sample form -->
+<div class="thumbnail-size-form hide">
+  <%= render 'thumbnail_size', size: {}, index: "<<index>>" %>
+</div>
+<!--/thumbnail size sample form -->
