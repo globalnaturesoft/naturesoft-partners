@@ -22,8 +22,8 @@
     <%= form_for([naturesoft_partners, :admin, partner], html: {class: "form-horizontal", id: "validate_checking", multipart: true}) do |f| %>
     
       <div class="form-group">
-        <label class="col-lg-2 control-label" ><%= t(:logo) %> </label>
-        <div class="media no-margin-top col-lg-4">
+        <label class="col-md-2 control-label" ><%= t(:logo) %> </label>
+        <div class="media no-margin-top col-md-4">
           <div class="media-left">
             <a href="#">
               <% if partner.logo.system.present? %>
@@ -39,44 +39,26 @@
             <span class="help-block">Accepted formats: gif, png, jpg.</span>
           </div>
         </div>
-        <label class="col-lg-2 control-label" style="text-align: right" ><%= t(:scale_type) %> <span class='text-danger'>*</span></label>
-        <div class="col-lg-4">
-          <select class="select2" name="partner[scale_type]">
-            <option <%= "selected" if partner.scale_type == "fill" %> value="fill"><%= t(:fill) %></option>
-            <option <%= "selected" if partner.scale_type == "fit" %> value="fit"><%= t(:fit) %></option>
-          </select>
-        </div>
-      </div>
         
-      <div class="form-group">
-        <label class="col-lg-2 control-label" ><%= t(:logo_size) %></label>
-        <label class="col-lg-1 control-label" ><%= t(:width) %> <span class='text-danger'>*</span></label>
-        <div class="col-lg-4">
-            <%= f.text_field :width, class: "form-control required", placeholder: "Enter width (pixel)" %>
-        </div>
-        <label class="col-lg-1 control-label" ><%= t(:height) %> <span class='text-danger'>*</span></label>
-        <div class="col-lg-4">
-            <%= f.text_field :height, class: "form-control required", placeholder: "Enter height (pixel)" %>
-        </div>
       </div>
       
       <div class="form-group">
-        <label class="col-lg-2 control-label" ><%= t(:name) %> <span class='text-danger'>*</span></label>
-        <div class="col-lg-10">
+        <label class="col-md-2 control-label" ><%= t(:name) %> <span class='text-danger'>*</span></label>
+        <div class="col-md-10">
           <%= f.text_field :name, class: "form-control required" %>
         </div>
       </div>
         
       <div class="form-group">
-        <label class="col-lg-2 control-label" ><%= t(:website_url) %> </label>
-        <div class="col-lg-10">
+        <label class="col-md-2 control-label" ><%= t(:website_url) %> </label>
+        <div class="col-md-10">
           <%= f.text_field :website, class: "form-control required" %>
         </div>
       </div>
           
       <div class="form-group">
-        <label class="col-lg-2 control-label" ><%= t(:description) %> </label>
-        <div class="col-lg-10">
+        <label class="col-md-2 control-label" ><%= t(:description) %> </label>
+        <div class="col-md-10">
           <%= f.text_area :description, class: "form-control required", style: "min-width:100%;max-width:100%" %>
         </div>
       </div>

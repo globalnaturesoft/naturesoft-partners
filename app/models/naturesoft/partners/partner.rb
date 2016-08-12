@@ -2,19 +2,12 @@ module Naturesoft::Partners
   class Partner < ApplicationRecord
     belongs_to :user
     validates :name, presence: true
-    validates :width, presence: true
-    validates :height, presence: true
     validates :logo, allow_blank: true, format: {
 			with: %r{\.(gif|jpg|png)\Z}i,
 			message: 'must be a URL for GIF, JPG or PNG image.'
 		}
     mount_uploader :logo, Naturesoft::Partners::PartnerUploader
-    
-    def self.scale_type
-      [
-      ["FILL", "fill"],
-      ["FIT", "fit"],]
-    end
+
     def self.sort_by
       [
         ["Name","naturesoft_partners_partners.name"],

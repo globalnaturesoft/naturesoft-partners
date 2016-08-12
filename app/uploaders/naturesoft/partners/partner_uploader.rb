@@ -51,9 +51,19 @@ module Naturesoft
       
       # For backend list
 			version :system do
-				process :resize_to_fit => [60, 60]
+				process :resize_to_fill => [80, 80]
 			end
-      
+			
+			# Thumbnails sizes
+			Naturesoft::Option.options("partners")["partners"]["thumbnails"].each do |row|
+				version :"#{row[0]}" do
+					if row[1]["scale"] == "fill"
+						process :resize_to_fill => [row[1]["width"].to_i, row[1]["height"].to_i]
+					else
+						process :resize_to_fit => [row[1]["width"].to_i, row[1]["height"].to_i]
+					end
+				end
+			end
     end
   end
 
