@@ -1,7 +1,7 @@
 Deface::Override.new(
   :virtual_path => "admin/modules/_main_menu",
-  :name => "add_setting_link",
+  :name => "add_partners_setting_link_to_main_menu",
   :insert_after => "[data-naturesoft-hook='setting_menu']",
-  :partial => "overrides/setting_link",
+  :partial => "overrides/partners_setting_link",
   :namespaced => true,
   :original => 'f5fe48b6dc6986328e0b873b3ffa1b228dd52a7c')
