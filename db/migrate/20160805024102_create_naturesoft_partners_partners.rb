@@ -1,4 +1,4 @@
-class CreateNaturesoftPartners < ActiveRecord::Migration[5.0]
+class CreateNaturesoftPartnersPartners < ActiveRecord::Migration[5.0]
   def change
     create_table :naturesoft_partners_partners do |t|
       t.string :name

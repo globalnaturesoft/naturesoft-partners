@@ -23,7 +23,7 @@ module Naturesoft
     
         # GET /partners/new
         def new
-          @partner = Partner.new
+          @partner = Partner.new(width: 400, height: 400, scale_type: "fit")
           add_breadcrumb "New Partners", naturesoft_partners.new_admin_partner_path
         end
     
@@ -57,7 +57,7 @@ module Naturesoft
         # DELETE /partners/1
         def destroy
           @partner.destroy
-          redirect_to admin_partners_path, notice: 'Partner was successfully destroyed.'
+          render text: 'Partner was successfully destroyed.'
         end
         
         # ENABLE /partners/stutus
