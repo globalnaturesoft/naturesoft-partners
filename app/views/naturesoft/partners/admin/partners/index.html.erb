@@ -69,10 +69,7 @@
                                 <%= partner.website %>
                             </td>
                             <td>
-                                <div class="media-left align_center">
-                                    <img src="" class="img-circle" alt="">
-                                    <br />Creator
-                                </div>
+                                <%= user_box(partner.user) %>
                             </td>
                             <td><%= partner.created_at.strftime("%d/%m/%Y") %></td>
                             <td><%= display_status(partner.status) %></td>
