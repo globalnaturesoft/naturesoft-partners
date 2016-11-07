@@ -1,12 +1,12 @@
 module Naturesoft
   module Partners
-    module Admin
-      class OptionsController < Naturesoft::Admin::AdminController
+    module Backend
+      class OptionsController < Naturesoft::Backend::BackendController
         before_action :default_breadcrumb
         
         # add top breadcrumb
         def default_breadcrumb
-          add_breadcrumb "Partners", naturesoft_partners.admin_partners_path
+          add_breadcrumb "Partners", naturesoft_partners.backend_partners_path
         end
     
         # GET /partners

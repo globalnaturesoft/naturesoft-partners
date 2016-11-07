@@ -1,13 +1,13 @@
 module Naturesoft
   module Partners
-    module Admin
-      class PartnersController < Naturesoft::Admin::AdminController
+    module Backend
+      class PartnersController < Naturesoft::Backend::BackendController
         before_action :set_partner, only: [:show, :edit, :update, :destroy, :enable, :disable]
         before_action :default_breadcrumb
         
         # add top breadcrumb
         def default_breadcrumb
-          add_breadcrumb "Partners", naturesoft_partners.admin_partners_path
+          add_breadcrumb "Partners", naturesoft_partners.backend_partners_path
         end
     
         # GET /partners
@@ -17,19 +17,19 @@ module Naturesoft
     
         # GET /partners/1
         def show
-          add_breadcrumb @partner.name, naturesoft_partners.new_admin_partner_path
+          add_breadcrumb @partner.name, naturesoft_partners.new_backend_partner_path
           add_breadcrumb "Show"
         end
     
         # GET /partners/new
         def new
           @partner = Partner.new(width: 400, height: 400, scale_type: "fit")
-          add_breadcrumb "New Partners", naturesoft_partners.new_admin_partner_path
+          add_breadcrumb "New Partners", naturesoft_partners.new_backend_partner_path
         end
     
         # GET /partners/1/edit
         def edit
-          add_breadcrumb @partner.name, naturesoft_partners.new_admin_partner_path
+          add_breadcrumb @partner.name, naturesoft_partners.new_backend_partner_path
           add_breadcrumb "Edit"
         end
     
@@ -39,7 +39,7 @@ module Naturesoft
           @partner.user = current_user
     
           if @partner.save
-            redirect_to admin_partners_path, notice: 'Partner was successfully created.'
+            redirect_to backend_partners_path, notice: 'Partner was successfully created.'
           else
             render :new
           end
@@ -48,7 +48,7 @@ module Naturesoft
         # PATCH/PUT /partners/1
         def update
           if @partner.update(partner_params)
-            redirect_to admin_partners_path, notice: 'Partner was successfully updated.'
+            redirect_to backend_partners_path, notice: 'Partner was successfully updated.'
           else
             render :edit
           end
